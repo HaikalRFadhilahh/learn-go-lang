@@ -4,7 +4,9 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 	Membuat Error Struct Not Found
