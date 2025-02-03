@@ -37,9 +37,20 @@ type SuccessResponse struct {
 */
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(200)
+	w.Header().Add("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&SuccessResponse{
 		StatusCode: 200,
 		Message:    "Go-Lang Application Programming Interface",
+	})
+}
+
+func NotFound(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(404)
+	w.Header().Add("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(&SuccessResponse{
+		StatusCode: 404,
+		Message:    "Not Found",
 	})
 }
 
@@ -52,6 +63,9 @@ func main() {
 
 	// Route
 	r.HandleFunc("/", Index)
+
+	// Handler Not Found
+	r.NotFoundHandler = http.HandlerFunc(NotFound)
 
 	// Running
 	fmt.Println("Server Starting...")
